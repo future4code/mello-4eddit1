@@ -1,6 +1,8 @@
 import React, { useEffect, useReducer } from 'react';
 import { loadPosts } from './postList_services';
 import { postsReducer } from './reducer';
+import { formatDistanceToNow } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 export default function PostList() {
     const [posts, dispatch] = useReducer(postsReducer, []);
@@ -23,7 +25,13 @@ export default function PostList() {
                         <p>{post.title}</p>
                         <p>{post.text}</p>
                         <p>{post.votesCount}</p>
-                        <p> Criado em {Date(post.createdAt)}</p>
+                        <p>
+                            {formatDistanceToNow(post.createdAt, {
+                                addSuffix: true,
+                                includeSeconds: true,
+                                locale: ptBR,
+                            })}
+                        </p>
                         <p>{post.commentsCount} 🗨</p>
                         <button
                             onClick={() =>
