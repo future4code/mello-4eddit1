@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/future4code/mello-4eddit1/issues"
   },
-  "homepage": "https://github.com/future4code/mello-4eddit1#readme",
+  "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
