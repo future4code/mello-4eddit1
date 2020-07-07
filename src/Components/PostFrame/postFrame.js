@@ -30,12 +30,12 @@ export default function PostFrame({
                 })}
             </p>
             <p>{commentsCount} 🗨</p>
-            <button
-                onClick={() => dispatch({ type: 'UPVOTE_POST', id: id })}
-            >UP</button>
-            <button
-                onClick={() => dispatch({ type: 'DOWNVOTE_POST', id: id })}
-            >DOWN</button>
+            <button onClick={() => dispatch({ type: 'UPVOTE_POST', id: id })}>
+                UP
+            </button>
+            <button onClick={() => dispatch({ type: 'DOWNVOTE_POST', id: id })}>
+                DOWN
+            </button>
         </div>
     );
 }
