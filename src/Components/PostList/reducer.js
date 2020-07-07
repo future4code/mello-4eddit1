@@ -1,5 +1,7 @@
 import { votePost } from './postList_services';
 
+export const initialState = [];
+
 export const postsReducer = (state, action) => {
     switch (action.type) {
         case 'LOAD_POSTS':

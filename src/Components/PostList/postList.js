@@ -1,10 +1,10 @@
 import React, { useEffect, useReducer } from 'react';
 import { loadPosts } from './postList_services';
-import { postsReducer } from './reducer';
+import { postsReducer, initialState } from './reducer';
 import PostFrame from '../PostFrame/postFrame';
 
 export default function PostList() {
-    const [posts, dispatch] = useReducer(postsReducer, []);
+    const [posts, dispatch] = useReducer(postsReducer, initialState);
 
     useEffect(() => {
         fetchData();
