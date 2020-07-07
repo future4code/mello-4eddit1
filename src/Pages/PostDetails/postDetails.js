@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import labeEdiit from '../../Services/labEdiit'
+import Comments from "../../Components/Comments";
 
 export default function PostDetails() {
   const params = useParams();
@@ -37,11 +38,9 @@ export default function PostDetails() {
           <button>Comentar</button>
         </div>
         {post.comments.map(comment => {
-          return <div key={comment.id}>
-            <strong>{comment.username}</strong>
-            <div>{comment.text}</div>
-            <div>Votos: {comment.votesCount}</div>
-          </div>
+          return (
+            <Comments comments={comment}/>
+            )
         })}
       </div>}
     </div>
