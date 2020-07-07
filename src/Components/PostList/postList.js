@@ -28,6 +28,7 @@ export default function PostList() {
                         commentsCount={post.commentsCount}
                         userVoteDirection={post.userVoteDirection}
                         createdAt={post.createdAt}
+                        dispatch={dispatch}
                     />
                 );
             })}

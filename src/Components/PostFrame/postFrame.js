@@ -1,7 +1,6 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { postsReducer } from '../PostList/reducer';
 
 export default function PostFrame({
     id,
@@ -12,9 +11,8 @@ export default function PostFrame({
     commentsCount,
     userVoteDirection,
     createdAt,
+    dispatch,
 }) {
-    const [dispatch] = useReducer(postsReducer, []);
-
     return (
         <div>
             <p>{username}</p>
