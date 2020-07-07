@@ -18,19 +18,7 @@ export default function PostList() {
     return (
         <>
             {posts.map((post) => {
-                return (
-                    <PostFrame
-                        id={post.id}
-                        username={post.username}
-                        title={post.title}
-                        text={post.text}
-                        votesCount={post.votesCount}
-                        commentsCount={post.commentsCount}
-                        userVoteDirection={post.userVoteDirection}
-                        createdAt={post.createdAt}
-                        dispatch={dispatch}
-                    />
-                );
+                return <PostFrame {...post} dispatch={dispatch} />;
             })}
         </>
     );
