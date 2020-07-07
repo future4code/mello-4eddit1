@@ -30,38 +30,12 @@ export default function PostFrame({
                 })}
             </p>
             <p>{commentsCount} 🗨</p>
-            <button onClick={() => dispatch({ type: 'UPVOTE_POST', id: id })}>
-                {userVoteDirection === 1 ? (
-                    <p
-                        onClick={() =>
-                            dispatch({
-                                type: 'REMOVE_VOTE_FROM_POST',
-                                id: id,
-                            })
-                        }
-                    >
-                        UPVOTED
-                    </p>
-                ) : (
-                    'Upvote'
-                )}
-            </button>
-            <button onClick={() => dispatch({ type: 'DOWNVOTE_POST', id: id })}>
-                {userVoteDirection === -1 ? (
-                    <p
-                        onClick={() =>
-                            dispatch({
-                                type: 'REMOVE_VOTE_FROM_POST',
-                                id: id,
-                            })
-                        }
-                    >
-                        DOWNVOTED
-                    </p>
-                ) : (
-                    'Downvote'
-                )}
-            </button>
+            <button
+                onClick={() => dispatch({ type: 'UPVOTE_POST', id: id })}
+            >UP</button>
+            <button
+                onClick={() => dispatch({ type: 'DOWNVOTE_POST', id: id })}
+            >DOWN</button>
         </div>
     );
 }
