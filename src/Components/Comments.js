@@ -6,6 +6,8 @@ const Comments = (props) => {
         <strong>{props.comments.username}</strong>
         <div>{props.comments.text}</div>
         <div>Votos: {props.comments.votesCount}</div>
+        <button onClick={() => props.like(props.comments)}>Curtir</button>
+        <button onClick={() => props.dislike(props.comments)}>Descurtir</button>
     </div>  
   )
 }
