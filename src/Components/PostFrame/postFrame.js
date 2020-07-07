@@ -2,6 +2,8 @@ import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { Link } from 'react-router-dom';
+import { Container, Text } from './postFrame_styles';
+import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 
 export default function PostFrame({
     id,
@@ -15,27 +17,50 @@ export default function PostFrame({
     dispatch,
 }) {
     return (
-        <div>
+        <Container>
             <Link to={`/posts/${id}`}>
-                <p>{username}</p>
+                <h1>{username}</h1>
+                <h3>{title}</h3>
+                <Text>{text}</Text>
+                <div>
+                    <p>{votesCount} votos</p>
+                    <p>
+                        {formatDistanceToNow(createdAt, {
+                            addSuffix: true,
+                            includeSeconds: true,
+                            locale: ptBR,
+                        })}
+                    </p>
+                    <p>{commentsCount} 🗨</p>
+                </div>
             </Link>
-            <p>{title}</p>
-            <p>{text}</p>
-            <p>{votesCount}</p>
-            <p>
-                {formatDistanceToNow(createdAt, {
-                    addSuffix: true,
-                    includeSeconds: true,
-                    locale: ptBR,
-                })}
-            </p>
-            <p>{commentsCount} 🗨</p>
-            <button onClick={() => dispatch({ type: 'UPVOTE_POST', id: id })}>
-                UP
-            </button>
-            <button onClick={() => dispatch({ type: 'DOWNVOTE_POST', id: id })}>
-                DOWN
-            </button>
-        </div>
+            <span>
+                <b
+                    role="emoji"
+                    onClick={() =>
+                        dispatch({
+                            type: 'UPVOTE_POST',
+                            id: id,
+                            direction: userVoteDirection,
+                        })
+                    }
+                >
+                    <AiFillLike />
+                </b>
+                {userVoteDirection}
+                <b
+                    role="emoji"
+                    onClick={() =>
+                        dispatch({
+                            type: 'DOWNVOTE_POST',
+                            id: id,
+                            direction: userVoteDirection,
+                        })
+                    }
+                >
+                    <AiFillDislike />
+                </b>
+            </span>
+        </Container>
     );
 }

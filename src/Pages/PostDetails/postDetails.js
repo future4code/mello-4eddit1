@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import labEdiit from '../../Services/labEdiit';
-import Comments from '../../Components/Comments';
-import PostDetail from '../../Components/PostDetail';
+import Comments from '../../Components/Comments/Comments';
+import PostDetail from '../../Components/PostDetail/PostDetail';
 
 //Authorization mockado
 const auth = {
