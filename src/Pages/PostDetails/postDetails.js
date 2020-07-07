@@ -7,8 +7,9 @@ import PostDetail from "../../Components/PostDetail";
 //Authorization mockado
 const auth = {
   headers: {
-    Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImlneXB1dFRXMkRWMDVMMTZIbVE0IiwidXNlcm5hbWUiOiI0ZWRkaXQxIiwiZW1haWwiOiI0ZWRkaXQxQGdtYWlsLmNvbSIsImlhdCI6MTU5NDA2MzI0OH0.lDsqRWdv0P3rr-X420atyvZACTdtrMMjpDTxsTS-tF0'
+    Authorization: token
 }}
+
 export default function PostDetails() {
   const params = useParams();
   const [post, setPost] = useState(undefined);
