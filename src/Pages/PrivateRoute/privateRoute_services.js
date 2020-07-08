@@ -1,3 +1,5 @@
+import labEdiit from '../../Services/labEdiit';
+
 export const checkAuth = async () => {
     try {
         await labEdiit.get('/posts', {

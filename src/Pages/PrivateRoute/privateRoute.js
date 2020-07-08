@@ -6,8 +6,10 @@ export function PrivateRoute({ ...props }) {
     const history = useHistory();
 
     useEffect(() => {
-        checkRoutePermission();
-    }, []);
+        setTimeout(async () => {
+            await checkRoutePermission();
+        }, 2000);
+    }, [history]);
 
     const runClientAuthCheck = () => {
         const token = localStorage.getItem('token');
@@ -16,8 +18,12 @@ export function PrivateRoute({ ...props }) {
 
     const checkRoutePermission = async () => {
         const check = await checkAuth();
-        if (!check) {
-            history.replace('/login');
+        console.log(check);
+        if (check === false) {
+            setTimeout(() => {
+                localStorage.clear();
+                history.push('/ogin');
+            }, 1000);
         }
     };
 
@@ -29,9 +35,25 @@ export function PrivateRoute({ ...props }) {
 }
 
 export function LoginRoute({ ...props }) {
+    const history = useHistory();
+
     const runClientAuthCheck = () => {
         const token = localStorage.getItem('token');
         return String(token).length > 10 && token != null ? true : false;
+    };
+
+    useEffect(() => {
+        setTimeout(async () => {
+            await checkRoutePermission();
+        }, 2000);
+    }, [history]);
+
+    const checkRoutePermission = async () => {
+        const check = await checkAuth();
+        console.log(check);
+        if (check === false) {
+            localStorage.clear();
+        }
     };
 
     return runClientAuthCheck() ? (
