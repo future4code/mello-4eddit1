@@ -1,27 +1,53 @@
 import React from 'react';
-import styled from 'styled-components';
+import { makeStyles } from '@material-ui/core/styles';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import {
+  DivContainer, DivPost, DivLikeDislike, InputPost
+} from './style';
 
-const DivComentario = styled.div`
-    border: 1px solid;
-`
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: '0.5em',
+  },
+}));
 
 const PostDetail = (props) => {
+  const classes = useStyles();
+
   return (
-    <DivComentario key={props.post.id}>
-      <h1>{props.post.username}</h1>
-      <h2>{props.post.text}</h2>
-      <div>Votos: {props.post.votesCount} - Comentários: {props.post.commentsCount}</div>
-      <button onClick={props.like}>Curtir</button>
-      <button onClick={props.dislike}>Descurtir</button>
+    <DivContainer key={props.post.id}>
+      <h2>@{props.post.username}</h2>
+      <DivPost>
+        <p>{props.post.text}</p>
+      </DivPost>
+      <p>Votos: {props.post.votesCount} - Comentários: {props.post.commentsCount}</p>
+      <DivLikeDislike>
+        <ThumbUpIcon 
+          titleAccess="curtir"
+          cursor="pointer"
+          onClick={props.like} />
+      </DivLikeDislike>
+      <DivLikeDislike>
+        <ThumbDownIcon 
+          titleAccess="descurtir"
+          cursor="pointer"
+          onClick={props.dislike} />
+      </DivLikeDislike>
       <div>
-        <input 
-          type='text' 
+        <InputPost 
+          type="text" 
+          placeholder="Comentar"
           onChange={props.changeInputValue}
           value={props.inputValue}
           />
-        <button onClick={props.submitComment}>Comentar</button>
+        <ArrowForwardIosIcon 
+          className={classes.root}
+          cursor="pointer"
+          onClick={props.submitComment} />
       </div>
-    </DivComentario>
+    </DivContainer>
     )
 }
 

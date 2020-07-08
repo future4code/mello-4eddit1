@@ -25,7 +25,6 @@ export default function PostDetails() {
             .get(`posts/${params.id}`, auth)
             .then((response) => {
                 setPost(response.data.post);
-                console.log(response.data.post);
             })
             .catch((error) => {
                 console.log(error);
@@ -39,7 +38,6 @@ export default function PostDetails() {
             : (data = { direction: 1 });
 
         labEdiit.put(`posts/${params.id}/vote`, data, auth).then((response) => {
-            console.log(response);
             getPost();
         });
     };
@@ -51,7 +49,6 @@ export default function PostDetails() {
             : (data = { direction: -1 });
 
         labEdiit.put(`posts/${params.id}/vote`, data, auth).then((response) => {
-            console.log(response);
             getPost();
         });
     };
@@ -64,7 +61,6 @@ export default function PostDetails() {
         labEdiit
             .put(`posts/${params.id}/comment/${comment.id}/vote`, data, auth)
             .then((response) => {
-                console.log(response);
                 getPost();
             });
     };
@@ -78,7 +74,6 @@ export default function PostDetails() {
         labEdiit
             .put(`posts/${params.id}/comment/${comment.id}/vote`, data, auth)
             .then((response) => {
-                console.log(response);
                 getPost();
             });
     };
