@@ -34,6 +34,8 @@ export function PrivateRoute({ ...props }) {
     );
 }
 
+/////////////////////////////////////
+
 export function LoginRoute({ ...props }) {
     const history = useHistory();
 

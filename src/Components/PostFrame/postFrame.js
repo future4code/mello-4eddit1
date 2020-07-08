@@ -4,7 +4,6 @@ import { ptBR } from 'date-fns/locale';
 import { Link } from 'react-router-dom';
 import { Container, Text } from './postFrame_styles';
 import { AiFillLike, AiFillDislike } from 'react-icons/ai';
-import { loadPosts } from '../PostList/postList_services';
 
 export default function PostFrame({
     id,
@@ -16,11 +15,16 @@ export default function PostFrame({
     userVoteDirection,
     createdAt,
     dispatch,
+    fetchData,
 }) {
-    async function fetchData() {
-        const apiCall = await loadPosts();
-        dispatch({ type: 'LOAD_POSTS', payload: apiCall });
-    }
+    const handleVote = (param) => () => {
+        dispatch({
+            type: param ? 'UPVOTE_POST' : 'DOWNVOTE_POST',
+            id: id,
+            direction: userVoteDirection,
+        });
+        fetchData();
+    }; //thunk !
 
     return (
         <Container>
@@ -41,31 +45,11 @@ export default function PostFrame({
                 </div>
             </Link>
             <span>
-                <b
-                    role="emoji"
-                    onClick={() => {
-                        dispatch({
-                            type: 'UPVOTE_POST',
-                            id: id,
-                            direction: userVoteDirection,
-                        });
-                        fetchData();
-                    }}
-                >
+                <b role="emoji" onClick={handleVote(true)}>
                     <AiFillLike />
                 </b>
                 {userVoteDirection}
-                <b
-                    role="emoji"
-                    onClick={() => {
-                        dispatch({
-                            type: 'DOWNVOTE_POST',
-                            id: id,
-                            direction: userVoteDirection,
-                        });
-                        fetchData();
-                    }}
-                >
+                <b role="emoji" onClick={handleVote(false)}>
                     <AiFillDislike />
                 </b>
             </span>

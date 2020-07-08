@@ -32,7 +32,7 @@ export default function PostList() {
                         post.title.includes(search) ||
                         post.text.includes(search) ||
                         post.username.includes(search) ? (
-                        <PostFrame {...post} dispatch={dispatch} />
+                        <PostFrame {...post} dispatch={dispatch} fetchData={fetchData} />
                     ) : (
                         <></>
                     );
