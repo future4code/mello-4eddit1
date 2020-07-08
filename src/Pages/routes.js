@@ -5,7 +5,7 @@ import Login from './Login/login';
 import SignUp from './SignUp/signUp';
 import PostDetails from './PostDetails/postDetails';
 import Feed from './Feed/feed';
-import PrivateRoute from './PrivateRoute/privateRoute';
+import { PrivateRoute, LoginRoute } from './PrivateRoute/privateRoute';
 
 export default function Routes() {
     return (
