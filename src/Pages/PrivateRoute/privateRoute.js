@@ -13,3 +13,16 @@ export default function PrivateRoute({ ...props }) {
         <Redirect to="/login" />
     );
 }
+
+export default function LoginRoute({ ...props }) {
+    const runClientAuthCheck = () => {
+        const token = localStorage.getItem('token');
+        return String(token).length > 10 && token != null ? true : false;
+    };
+
+    return runClientAuthCheck() ? (
+        <Redirect to="/feed" />
+    ) : (
+        <Route {...props} />
+    );
+}
