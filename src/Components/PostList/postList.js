@@ -9,11 +9,16 @@ export default function PostList() {
     const [search, setSearch] = useState('');
 
     useEffect(() => {
-        fetchData();
+        setInterval(() => {
+            fetchData();
+        }, 3000);
+        return () => {
+            clearInterval();
+        };
     }, []);
 
     async function fetchData() {
-        const apiCall = await loadPosts()
+        const apiCall = await loadPosts();
         dispatch({ type: 'LOAD_POSTS', payload: apiCall });
     }
 
