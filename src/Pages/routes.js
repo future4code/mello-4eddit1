@@ -5,15 +5,17 @@ import Login from './Login/login';
 import SignUp from './SignUp/signUp';
 import PostDetails from './PostDetails/postDetails';
 import Feed from './Feed/feed';
+import PrivateRoute from './PrivateRoute/privateRoute';
 
 export default function Routes() {
     return (
         <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/feed" component={Feed} />
-            <Route exact path="/posts/:id" component={PostDetails} />
+            <Route path="*" component={Login} />
+            <PrivateRoute exact path="/signup" component={SignUp} />
+            <PrivateRoute exact path="/feed" component={Feed} />
+            <PrivateRoute exact path="/posts/:id" component={PostDetails} />
         </Switch>
     );
 }
