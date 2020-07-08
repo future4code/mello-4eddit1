@@ -54,6 +54,7 @@ export default function Login() {
         try {
             const response = await Axios.post(`${baseUrl}/login`, loginBody);
             window.localStorage.setItem('token', response.data.token);
+            window.localStorage.setItem('user', response.data.user.username);
             alert('😃,Você Está Logado');
             history.push('/feed');
         } catch (error) {
