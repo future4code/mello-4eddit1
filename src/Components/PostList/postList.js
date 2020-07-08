@@ -9,12 +9,7 @@ export default function PostList() {
     const [search, setSearch] = useState('');
 
     useEffect(() => {
-        setInterval(() => {
-            fetchData();
-        }, 3000);
-        return () => {
-            clearInterval();
-        };
+        fetchData();
     }, []);
 
     async function fetchData() {

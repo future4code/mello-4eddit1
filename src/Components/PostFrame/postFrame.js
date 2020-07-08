@@ -4,6 +4,7 @@ import { ptBR } from 'date-fns/locale';
 import { Link } from 'react-router-dom';
 import { Container, Text } from './postFrame_styles';
 import { AiFillLike, AiFillDislike } from 'react-icons/ai';
+import { loadPosts } from '../PostList/postList_services';
 
 export default function PostFrame({
     id,
@@ -16,6 +17,11 @@ export default function PostFrame({
     createdAt,
     dispatch,
 }) {
+    async function fetchData() {
+        const apiCall = await loadPosts();
+        dispatch({ type: 'LOAD_POSTS', payload: apiCall });
+    }
+
     return (
         <Container>
             <Link to={`/posts/${id}`}>
@@ -37,26 +43,28 @@ export default function PostFrame({
             <span>
                 <b
                     role="emoji"
-                    onClick={() =>
+                    onClick={() => {
                         dispatch({
                             type: 'UPVOTE_POST',
                             id: id,
                             direction: userVoteDirection,
-                        })
-                    }
+                        });
+                        fetchData();
+                    }}
                 >
                     <AiFillLike />
                 </b>
                 {userVoteDirection}
                 <b
                     role="emoji"
-                    onClick={() =>
+                    onClick={() => {
                         dispatch({
                             type: 'DOWNVOTE_POST',
                             id: id,
                             direction: userVoteDirection,
-                        })
-                    }
+                        });
+                        fetchData();
+                    }}
                 >
                     <AiFillDislike />
                 </b>

@@ -31,9 +31,6 @@ export const postsReducer = (state, action) => {
                 votePost(action.id, 0);
             }
             return state;
-        case 'REMOVE_VOTE_FROM_POST':
-            votePost(action.id, 0);
-            return state;
         default:
             return state;
     }
