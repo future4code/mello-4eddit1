@@ -13,7 +13,8 @@ export default function PostList() {
     }, []);
 
     async function fetchData() {
-        dispatch({ type: 'LOAD_POSTS', payload: await loadPosts() });
+        const apiCall = await loadPosts()
+        dispatch({ type: 'LOAD_POSTS', payload: apiCall });
     }
 
     return (
