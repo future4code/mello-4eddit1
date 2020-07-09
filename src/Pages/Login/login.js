@@ -63,7 +63,7 @@ export default function Login() {
         }
     };
     const signUp = () => {
-        history.push('/signUp');
+        history.push('/signup');
     };
 
     return (
