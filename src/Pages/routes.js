@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Landing from './Landing/landing';
-import Login from './Login/login';
-import SignUp from './SignUp/signUp';
-import PostDetails from './PostDetails/postDetails';
-import Feed from './Feed/feed';
-import { PrivateRoute, LoginRoute } from './PrivateRoute/privateRoute';
+import Landing from './Landing/landingPage';
+import Login from './Login/loginPage';
+import SignUp from './SignUp/signUpPage';
+import PostDetails from './PostDetails/postDetailsPage';
+import Feed from './Feed/feedPage';
+import { PrivateRoute, LoginRoute } from './PrivateRoute/privateRoutePage';
 import HeaderLogin from '../Components/Header/HeaderLogin';
 import HeaderLogout from '../Components/Header/HeaderLogout';
 

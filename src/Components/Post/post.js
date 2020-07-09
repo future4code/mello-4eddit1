@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { useParams } from 'react-router-dom';
+import Comments from './Comments/Comments';
+import PostDetail from './PostDetail/PostDetail';
 import labEdiit from '../../Services/labEdiit';
-import Comments from '../../Components/Comments/Comments';
-import PostDetail from '../../Components/PostDetail/PostDetail';
 
-//Authorization mockado
-const auth = {
-    headers: {
-        Authorization: localStorage.getItem('token'),
-    },
-};
-
-export default function PostDetails() {
+export default function Post() {
     const params = useParams();
     const [post, setPost] = useState(undefined);
     const [inputValue, setInputValue] = useState('');
@@ -19,6 +13,12 @@ export default function PostDetails() {
     useEffect(() => {
         getPost();
     }, []);
+
+    const auth = {
+        headers: {
+            Authorization: localStorage.getItem('token'),
+        },
+    };
 
     const getPost = () => {
         labEdiit
