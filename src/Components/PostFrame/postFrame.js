@@ -1,9 +1,22 @@
 import React from 'react';
+
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { Link } from 'react-router-dom';
-import { Container, Text } from './postFrame_styles';
+import { Container, Text, Footer } from './postFrame_styles';
 import { AiFillLike, AiFillDislike } from 'react-icons/ai';
+import {
+    FacebookShareButton,
+    LinkedinShareButton,
+    RedditShareButton,
+    TwitterShareButton,
+    WhatsappShareButton,
+    FacebookIcon,
+    WhatsappIcon,
+    RedditIcon,
+    TwitterIcon,
+    LinkedinIcon,
+} from 'react-share';
 
 export default function PostFrame({
     id,
@@ -53,6 +66,30 @@ export default function PostFrame({
                     <AiFillDislike />
                 </b>
             </span>
+            <Footer>
+                <FacebookShareButton
+                    url={`${window.location.host}/posts/${id}`}
+                >
+                    <FacebookIcon size={50} />
+                </FacebookShareButton>
+                <TwitterShareButton url={`${window.location.host}/posts/${id}`}>
+                    <TwitterIcon size={50} />
+                </TwitterShareButton>
+                <RedditShareButton url={`${window.location.host}/posts/${id}`}>
+                    <RedditIcon size={50} />
+                </RedditShareButton>
+                <WhatsappShareButton
+                    url={`${window.location.host}/posts/${id}`}
+                >
+                    <WhatsappIcon size={50} />
+                </WhatsappShareButton>
+
+                <LinkedinShareButton
+                    url={`${window.location.host}/posts/${id}`}
+                >
+                    <LinkedinIcon size={50} />
+                </LinkedinShareButton>
+            </Footer>
         </Container>
     );
 }
