@@ -12,7 +12,7 @@ import HeaderLogout from '../Components/Header/HeaderLogout';
 export default function Routes() {
     return (
         <Switch>
-            <Route exact path="/" component={Landing}>
+ <Route exact path="/" component={Landing}>
                 <HeaderLogin />
                 <Landing />
             </Route>
@@ -20,10 +20,10 @@ export default function Routes() {
                 <HeaderLogin />
                 <Login />
             </LoginRoute>
-            <PrivateRoute exact path="/signup" component={SignUp} >
+            <LoginRoute exact path="/signup" component={SignUp} >
                 <HeaderLogin />
                 <SignUp />
-            </PrivateRoute>
+            </LoginRoute>
             <PrivateRoute exact path="/feed" component={Feed} >
                 <HeaderLogout />
                 <Feed />
