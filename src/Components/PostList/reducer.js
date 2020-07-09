@@ -1,17 +1,6 @@
 import { votePost } from './postList_services';
 
-export const initialState = [
-    {
-        userVoteDirection: -1,
-        id: 'WCmBIGyynC5ihJFUmHFf',
-        text: 'ait!',
-        commentsCount: 1,
-        title: 'Titulo aqui!',
-        username: 'darvas',
-        votesCount: -1,
-        createdAt: 1591622901616,
-    },
-];
+export const initialState = [];
 
 export const postsReducer = (state, action) => {
     switch (action.type) {

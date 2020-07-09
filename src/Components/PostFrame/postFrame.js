@@ -39,6 +39,8 @@ export default function PostFrame({
         fetchData();
     }; //thunk !
 
+    const location = `https://${window.location.host}/posts/${id}`; // test
+
     return (
         <Container>
             <Link to={`/posts/${id}`}>
@@ -72,21 +74,16 @@ export default function PostFrame({
                 >
                     <FacebookIcon size={50} />
                 </FacebookShareButton>
-                <TwitterShareButton url={`${window.location.host}/posts/${id}`}>
+                <TwitterShareButton url={location}>
                     <TwitterIcon size={50} />
                 </TwitterShareButton>
-                <RedditShareButton url={`${window.location.host}/posts/${id}`}>
+                <RedditShareButton url={location}>
                     <RedditIcon size={50} />
                 </RedditShareButton>
-                <WhatsappShareButton
-                    url={`${window.location.host}/posts/${id}`}
-                >
+                <WhatsappShareButton url={location}>
                     <WhatsappIcon size={50} />
                 </WhatsappShareButton>
-
-                <LinkedinShareButton
-                    url={`${window.location.host}/posts/${id}`}
-                >
+                <LinkedinShareButton url={location}>
                     <LinkedinIcon size={50} />
                 </LinkedinShareButton>
             </Footer>
