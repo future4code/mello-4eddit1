@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { ContainerLogin, FormDiv } from './logindialog_styles';
 import labEdiit from '../../Services/labEdiit';
+import ImageVector from "../../Global/image_vector/img-test-4.png"
 
 export default function LoginDialog() {
     const [loginBody, setLoginBody] = useState({});
@@ -27,6 +28,7 @@ export default function LoginDialog() {
 
     return (
         <ContainerLogin>
+            <img className="ImageBackground" src={ImageVector} />
             <FormDiv>
                 <h1>Login</h1>
                 <input id="email" placeholder="Email" onChange={handleForm} />
