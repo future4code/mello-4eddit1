@@ -44,7 +44,7 @@ export default function PostFrame({
     return (
         <Container>
             <Link to={`/posts/${id}`}>
-                <h1>{username}</h1>
+                <h1>@{username}</h1>
                 <h3>{title}</h3>
                 <Text>{text}</Text>
                 <div>

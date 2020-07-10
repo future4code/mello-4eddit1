@@ -28,3 +28,15 @@ export const votePost = async (id, direction) => {
         console.error(error);
     }
 };
+
+export const createPost = async (content) => {
+    try {
+        await labEdiit.post(`/posts`, content, {
+            headers: {
+                Authorization: localStorage.getItem('token'),
+            },
+        });
+    } catch (error) {
+        console.error(error);
+    }
+};
