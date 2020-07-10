@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { 
-    DivHeader, DivLogo, DivLogin, ImgLogo
+    DivHeader, DivVazia, DivLogo, DivLogin, ImgLogo
 } from './style';
 import logo from '../../Global/image.png'
 
@@ -10,7 +10,7 @@ const HeaderLogin = () => {
 
     return (
         <DivHeader>
-            <div></div>
+            <DivVazia />
             <DivLogo onClick={() => history.push('/')}>
                 <ImgLogo src={logo} />
             </DivLogo>

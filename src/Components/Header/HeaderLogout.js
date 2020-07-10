@@ -1,26 +1,30 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { 
-    DivHeader, DivLogo, DivLogin, ImgLogo
+    DivHeader, DivLogo, DivUser, DivLogout, ImgLogo
 } from './style';
 import logo from '../../Global/image.png'
 
 const HeaderLogout = () => {
     const history = useHistory();
-
+    const user = localStorage.getItem('user')
     const logout = () => {
         localStorage.clear()
         history.push('/')
     }
       return(
         <DivHeader>
-            <div></div>
-            <DivLogo onClick={() => history.push('/feed')}>
-                <ImgLogo src={logo} />
+            <DivLogo>
+                <Link to="/feed">
+                    <ImgLogo src={logo} />
+                </Link>
             </DivLogo>
-            <DivLogin onClick={logout}>
+            <DivUser>
+                {user}
+            </DivUser>
+            <DivLogout onClick={logout}>
                 Logout
-            </DivLogin>
+            </DivLogout>
         </DivHeader>)
 }
 
