@@ -37,7 +37,7 @@ export default function PostFrame({
             direction: userVoteDirection,
         });
         fetchData();
-    }; //thunk !
+    }; //thunk ! color={userVoteDirection === 1 }
 
     const location = `https://${window.location.host}/posts/${id}`; // test
 
@@ -61,11 +61,14 @@ export default function PostFrame({
             </Link>
             <span>
                 <b role="emoji" onClick={handleVote(true)}>
-                    <AiFillLike />
+                    <AiFillLike
+                        color={userVoteDirection === 1 ? 'black' : 'gray'}
+                    />
                 </b>
-                {userVoteDirection}
                 <b role="emoji" onClick={handleVote(false)}>
-                    <AiFillDislike />
+                    <AiFillDislike
+                        color={userVoteDirection === -1 ? 'black' : 'gray'}
+                    />
                 </b>
             </span>
             <Footer>
