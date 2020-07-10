@@ -3,6 +3,7 @@ import { loadPosts } from './postList_services';
 import { postsReducer, initialState } from './reducer';
 import PostFrame from '../PostFrame/postFrame';
 import { Container, SearchInput, SearchInputBox } from './postList_styles';
+import PostCreator from '../CreatePostForm/createPost';
 
 export default function PostList() {
     const [posts, dispatch] = useReducer(postsReducer, initialState);
@@ -19,6 +20,7 @@ export default function PostList() {
 
     return (
         <>
+            <PostCreator dispatch={dispatch} fetchData={fetchData} />
             <SearchInputBox>
                 <SearchInput
                     type="text"
