@@ -1,4 +1,5 @@
 import React from 'react';
+import Comments from '../Comments/Comments';
 import { makeStyles } from '@material-ui/core/styles';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 const PostDetail = (props) => {
   const classes = useStyles();
 
-  return (
+  return (<>
     <DivContainer key={props.post.id}>
       <h2>@{props.post.username}</h2>
       <DivPost>
@@ -48,6 +49,16 @@ const PostDetail = (props) => {
           onClick={props.submitComment} />
       </div>
     </DivContainer>
+    {props.post.comments.map((comment) => {
+      return (
+        <Comments
+          key={comment.id}
+          comments={comment}
+          likeComment={props.likeComment}
+          dislikeComment={props.dislikeComment}
+        />);
+      })}
+    </>
     )
 }
 
