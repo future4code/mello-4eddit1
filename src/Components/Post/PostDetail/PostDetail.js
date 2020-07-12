@@ -12,6 +12,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     height: '0.5em',
   },
+  likeDislike: {
+    color: 'black'
+  },
+  noAction: {
+    color: 'gray'
+  }
 }));
 
 const PostDetail = (props) => {
@@ -26,12 +32,14 @@ const PostDetail = (props) => {
       <p>Votos: {props.post.votesCount} - Comentários: {props.post.commentsCount}</p>
       <DivLikeDislike>
         <ThumbUpIcon 
+          className={props.post.userVoteDirection === 1 ? (classes.likeDislike) : (classes.noAction)}
           titleAccess="curtir"
           cursor="pointer"
           onClick={props.like} />
       </DivLikeDislike>
       <DivLikeDislike>
-        <ThumbDownIcon 
+        <ThumbDownIcon
+          className={props.post.userVoteDirection === -1 ? (classes.likeDislike) : (classes.noAction)} 
           titleAccess="descurtir"
           cursor="pointer"
           onClick={props.dislike} />
