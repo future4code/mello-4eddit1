@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
-import Comments from './Comments/Comments';
 import PostDetail from './PostDetail/PostDetail';
 import labEdiit from '../../Services/labEdiit';
+import LikeCommentContext from '../../Contexts/LikeCommentContext';
+import DisLikeCommentContext from '../../Contexts/DisLikeCommentContext';
 
 export default function Post() {
     const params = useParams();
@@ -99,9 +100,9 @@ export default function Post() {
     };
 
     return (
-        <>
+        <LikeCommentContext.Provider value={likeComment}>
+          <DisLikeCommentContext.Provider value={dislikeComment}>
             {post !== undefined && (
-                <>
                     <PostDetail
                         key={post.id}
                         post={post}
@@ -110,19 +111,10 @@ export default function Post() {
                         changeInputValue={onChangeComment}
                         submitComment={submitComment}
                         inputValue={inputValue}
+                        dislikeComment={dislikeComment}
                     />
-                    {post.comments.map((comment) => {
-                        return (
-                            <Comments
-                                key={comment.id}
-                                comments={comment}
-                                like={likeComment}
-                                dislike={dislikeComment}
-                            />
-                        );
-                    })}
-                </>
             )}
-        </>
+          </DisLikeCommentContext.Provider>
+        </LikeCommentContext.Provider>
     );
 }

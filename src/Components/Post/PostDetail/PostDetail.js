@@ -1,4 +1,5 @@
 import React from 'react';
+import Comments from '../Comments/Comments';
 import { makeStyles } from '@material-ui/core/styles';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
@@ -11,12 +12,18 @@ const useStyles = makeStyles((theme) => ({
   root: {
     height: '0.5em',
   },
+  likeDislike: {
+    color: 'black'
+  },
+  noAction: {
+    color: 'gray'
+  }
 }));
 
 const PostDetail = (props) => {
   const classes = useStyles();
 
-  return (
+  return (<>
     <DivContainer key={props.post.id}>
       <h2>@{props.post.username}</h2>
       <DivPost>
@@ -25,12 +32,14 @@ const PostDetail = (props) => {
       <p>Votos: {props.post.votesCount} - Comentários: {props.post.commentsCount}</p>
       <DivLikeDislike>
         <ThumbUpIcon 
+          className={props.post.userVoteDirection === 1 ? (classes.likeDislike) : (classes.noAction)}
           titleAccess="curtir"
           cursor="pointer"
           onClick={props.like} />
       </DivLikeDislike>
       <DivLikeDislike>
-        <ThumbDownIcon 
+        <ThumbDownIcon
+          className={props.post.userVoteDirection === -1 ? (classes.likeDislike) : (classes.noAction)} 
           titleAccess="descurtir"
           cursor="pointer"
           onClick={props.dislike} />
@@ -48,6 +57,16 @@ const PostDetail = (props) => {
           onClick={props.submitComment} />
       </div>
     </DivContainer>
+    {props.post.comments.map((comment) => {
+      return (
+        <Comments
+          key={comment.id}
+          comments={comment}
+          likeComment={props.likeComment}
+          dislikeComment={props.dislikeComment}
+        />);
+      })}
+    </>
     )
 }
 
