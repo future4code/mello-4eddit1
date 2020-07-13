@@ -1,19 +1,20 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import { act } from 'react-dom/test-utils';
 import { render , fireEvent, wait, getByText, getByTestId, getByPlaceholderText } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 //import labEddit from '../../Services/labEdiit';
 import App from './App';
 import LandingPage from './Pages/Landing/landingPage';
 import LoginPage from './Pages/Login/loginPage';
-import FeedPage from './Pages/Feed/feedPage';
 import Axios from 'axios';
 import labEdiit from './Services/labEdiit';
 import Feed from './Pages/Feed/feedPage';
+import PostDetail from './Pages/PostDetails/postDetailsPage';
 
 
-labEdiit.get = jest.fn().mockResolvedValue({posts: []})
+labEdiit.get = jest.fn().mockResolvedValue({data: {}})
 Axios.post = jest.fn().mockResolvedValue();
 
 test('LandingPage route LoginPage', () => {
@@ -71,10 +72,11 @@ test('LandingPage route SignUpPage', async () => {
     });
 });
 
-test('Feed', () => {
+test('Feed search title ande like post', async () => {
 
-    Axios.get = jest.fn().mockResolvedValue({
-        posts: [
+    labEdiit.get = jest.fn().mockResolvedValue({
+        data: {
+            posts: [
             {
             "comments": [
                 {
@@ -103,8 +105,8 @@ test('Feed', () => {
             "title": "titulo padrao",
             "username": "usuario_padrao"
             }
-        ]
-    });
+            ]}
+        });
 
     const history = createMemoryHistory();
     const { container, getByPlaceholderText, getByText, getByTestId } = render(
@@ -112,19 +114,182 @@ test('Feed', () => {
             <Feed />
         </Router>);
 
-    wait(() => {
+    await wait(() => {
         const inputSearch = getByPlaceholderText(/Busque um post/i);
         expect(inputSearch).toBeInTheDocument('Busque um post');
         userEvent.type(inputSearch, 'titulo');
-        expect(Axios.get).toHaveBeenCalled();
+        expect(labEdiit.get).toHaveBeenCalled();
         const usernamePost = getByText(/usuario_padrao/i);
         expect(usernamePost).toBeInTheDocument(/usuario_padrao/i);
         const votePostFeed = getByTestId(/votePostFeed/i);
         expect(votePostFeed).toBeInTheDocument();
         userEvent.click(votePostFeed);
         const votesPost = getByTestId(/votes-count/i);
-        expect(votesPost).toBeInTheDocument('10 votos');
-        
+        expect(votesPost).toBeInTheDocument('9 votos');
     });
 
-})
+}, 10000);
+
+test('Feed search text and dislike post', async () => {
+
+    labEdiit.get = jest.fn().mockResolvedValue({
+        data: {
+            posts: [
+            {
+            "comments": [
+                {
+                    "userVoteDirection": 0,
+                    "id": "EiKumukbqDWWlWqfcogX",
+                    "votesCount": -1,
+                    "createdAt": 1591990686529,
+                    "username": "usuario_padrao",
+                    "text": "comentario padrao"
+                },
+                {
+                    "userVoteDirection": 0,
+                    "id": "xPGlXP51YIdH3N4AkWaE",
+                    "createdAt": 1594152919820,
+                    "votesCount": 0,
+                    "username": "admin",
+                    "text": "Comentando"
+                }
+            ],
+            "userVoteDirection": 0,
+            "id": "0NK4I1fhiAMoCZ8ooFFb",
+            "votesCount": 8,
+            "createdAt": 1591990585598,
+            "text": "post padrao",
+            "commentsCount": 2,
+            "title": "titulo padrao",
+            "username": "usuario_padrao"
+            }
+            ]}
+        });
+
+    const history = createMemoryHistory();
+    const { container, getByPlaceholderText, getByText, getByTestId } = render(
+        <Router history={history}>
+            <Feed />
+        </Router>);
+
+    await wait(() => {
+        const inputSearch = getByPlaceholderText(/Busque um post/i);
+        expect(inputSearch).toBeInTheDocument('Busque um post');
+        userEvent.type(inputSearch, 'post padrao');
+        expect(labEdiit.get).toHaveBeenCalled();
+        const usernamePost = getByText(/usuario_padrao/i);
+        expect(usernamePost).toBeInTheDocument(/usuario_padrao/i);
+        const votePostFeed = getByTestId(/dislikePostFeed/i);
+        expect(votePostFeed).toBeInTheDocument();
+        userEvent.click(votePostFeed);
+        const votesPost = getByTestId(/votes-count/i);
+        expect(votesPost).toBeInTheDocument('7 votos');
+    });
+
+}, 10000);
+
+test('Feed search text', async () => {
+
+    labEdiit.get = jest.fn().mockResolvedValue({
+        data: {
+            posts: [
+            {
+            "comments": [
+                {
+                    "userVoteDirection": 0,
+                    "id": "EiKumukbqDWWlWqfcogX",
+                    "votesCount": -1,
+                    "createdAt": 1591990686529,
+                    "username": "usuario_padrao",
+                    "text": "comentario padrao"
+                },
+                {
+                    "userVoteDirection": 0,
+                    "id": "xPGlXP51YIdH3N4AkWaE",
+                    "createdAt": 1594152919820,
+                    "votesCount": 0,
+                    "username": "admin",
+                    "text": "Comentando"
+                }
+            ],
+            "userVoteDirection": 0,
+            "id": "0NK4I1fhiAMoCZ8ooFFb",
+            "votesCount": 8,
+            "createdAt": 1591990585598,
+            "text": "post padrao",
+            "commentsCount": 2,
+            "title": "titulo padrao",
+            "username": "usuario_padrao"
+            }
+            ]}
+        });
+
+    const history = createMemoryHistory();
+    const { container, getByPlaceholderText, getByText, getByTestId } = render(
+        <Router history={history}>
+            <Feed />
+        </Router>);
+
+    await wait(() => {
+        const inputSearch = getByPlaceholderText(/Busque um post/i);
+        expect(inputSearch).toBeInTheDocument('Busque um post');
+        userEvent.type(inputSearch, 'usuario_padrao');
+        expect(labEdiit.get).toHaveBeenCalled();
+        const usernamePost = getByText(/usuario_padrao/i);
+        expect(usernamePost).toBeInTheDocument(/usuario_padrao/i);
+        const votePostFeed = getByTestId(/votePostFeed/i);
+        expect(votePostFeed).toBeInTheDocument();
+        userEvent.click(votePostFeed);
+        const votesPost = getByTestId(/votes-count/i);
+        expect(votesPost).toBeInTheDocument('9 votos');
+    });
+
+}, 10000);
+
+test('PostDetail', async () => {
+
+    labEdiit.get = jest.fn().mockResolvedValue({
+        data: {
+          "post": {
+            "comments": [
+                {
+                    "userVoteDirection": 0,
+                    "id": "SPcg2X1uLOliyPPWx9OM",
+                    "createdAt": 1594393338256,
+                    "votesCount": 0,
+                    "username": "maanoeln",
+                    "text": "eeeee, essa é minha opniao"
+                }
+            ],
+            "userVoteDirection": 0,
+            "id": "2jhSrLYkRUsf6uIFyPzg",
+            "text": "eeee",
+            "commentsCount": 1,
+            "title": "eeee",
+            "username": "mello",
+            "votesCount": 1,
+            "createdAt": 1594239257441
+        }}
+    });
+    const history = createMemoryHistory();
+
+    const { container, getByPlaceholderText, getByText, getByTestId } = render(
+        <Router history={history}> 
+            <PostDetail />
+        </Router>);
+
+    await wait(() => {
+        const usernamePost = getByText(/@mello/);
+        expect(usernamePost).toBeInTheDocument('@mello');
+        const inputComment = getByPlaceholderText('Comentar');
+        userEvent.type(inputComment, 'Bom comentário');
+        const btnComment = getByTestId(/btn-comment/i);
+        userEvent.click(btnComment);
+        
+        console.log(container.innerHTML);
+    });
+    
+    //const logout = getByText(/Logout/i);
+    //console.log(logout);
+
+}, 10000)
